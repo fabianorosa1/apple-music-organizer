@@ -1,0 +1,199 @@
+{
+  "root_folder": "AI Organized",
+  "source_folder": "Playlists",
+  "include_root_playlists": true,
+  "provider": "ai",
+  "ai": {
+    "endpoint": "http://127.0.0.1:8000/v1/chat/completions",
+    "model": "Qwen3-14B-MLX-6bit",
+    "api_key_env": "OMLX_API_KEY",
+    "timeout_seconds": 45
+  },
+  "taxonomy": {
+    "Genres": [
+      "Rock",
+      "Pop",
+      "Electronic",
+      "Hip-Hop",
+      "R&B-Soul",
+      "Jazz",
+      "Classical",
+      "Folk",
+      "Country",
+      "Reggae",
+      "Latin",
+      "Brazilian",
+      "Soundtracks",
+      "Other"
+    ],
+    "Moods": [
+      "Focus",
+      "Relax",
+      "Workout",
+      "Party",
+      "Melancholy",
+      "Romantic",
+      "Other"
+    ],
+    "Languages": [
+      "English",
+      "Spanish",
+      "French",
+      "German",
+      "Italian",
+      "Portuguese",
+      "Dutch",
+      "Other"
+    ]
+  },
+  "protected_playlists": [
+    "Library",
+    "Music",
+    "Favourite Songs",
+    "Music Videos",
+    "TV & Movies",
+    "AI Organized"
+  ],
+  "skip_empty_playlists": true,
+  "hints": {
+    "genre_keywords": {
+      "Rock": [
+        "rock",
+        "indie",
+        "punk",
+        "metal",
+        "alternative"
+      ],
+      "Pop": [
+        "pop",
+        "top hits",
+        "radio"
+      ],
+      "Electronic": [
+        "electronic",
+        "techno",
+        "house",
+        "edm",
+        "ambient",
+        "trance"
+      ],
+      "Hip-Hop": [
+        "hip hop",
+        "hip-hop",
+        "rap",
+        "trap"
+      ],
+      "Jazz": [
+        "jazz",
+        "blues",
+        "swing"
+      ],
+      "Classical": [
+        "classical",
+        "piano",
+        "orchestra",
+        "concerto"
+      ],
+      "Soundtracks": [
+        "soundtrack",
+        "score",
+        "film",
+        "movie"
+      ],
+      "Latin": [
+        "latin",
+        "cumbia",
+        "salsa",
+        "reggaeton",
+        "latino"
+      ],
+      "Brazilian": [
+        "mpb",
+        "sertanejo",
+        "samba",
+        "bossa",
+        "brazilian",
+        "nacional"
+      ],
+      "Reggae": [
+        "reggae"
+      ],
+      "Country": [
+        "country"
+      ]
+    },
+    "mood_keywords": {
+      "Focus": [
+        "focus",
+        "study",
+        "work",
+        "concentration"
+      ],
+      "Relax": [
+        "relax",
+        "sleep",
+        "calm",
+        "chill",
+        "meditation"
+      ],
+      "Workout": [
+        "workout",
+        "gym",
+        "run",
+        "training"
+      ],
+      "Party": [
+        "party",
+        "dance",
+        "club"
+      ],
+      "Melancholy": [
+        "sad",
+        "melancholy",
+        "rainy",
+        "cry"
+      ],
+      "Romantic": [
+        "love",
+        "romantic",
+        "valentine"
+      ]
+    },
+    "language_keywords": {
+      "English": [
+        "english"
+      ],
+      "Spanish": [
+        "español",
+        "spanish",
+        "latino"
+      ],
+      "French": [
+        "français",
+        "french"
+      ],
+      "German": [
+        "deutsch",
+        "german"
+      ],
+      "Italian": [
+        "italiano",
+        "italian"
+      ],
+      "Portuguese": [
+        "português",
+        "brazil",
+        "brasil"
+      ],
+      "Dutch": [
+        "nederlands",
+        "dutch"
+      ]
+    }
+  },
+  "hierarchy": [
+    "genre",
+    "mood"
+  ],
+  "reorganize_existing": true
+}
