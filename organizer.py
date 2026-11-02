@@ -58,7 +58,7 @@ def classify_ai(p, c):
     sample = {"name": p["name"], "track_count": p.get("track_count", 0), "genres": sorted(set(filter(None, (g.strip() for g in p.get("genre", "").split(","))))), "artists": sorted(set(filter(None, (a.strip() for a in p.get("artist", "").split(","))))), "tracks": p.get("tracks", [])[:12]}
     system = "You classify music playlists. Reply with one JSON object with string keys genre, mood, language. Each value MUST be copied exactly from the matching taxonomy list; use Other when unsure. No explanations."
     payload = {"model": ai["model"], "temperature": 0, "chat_template_kwargs": {"enable_thinking": False}, "messages": [{"role": "system", "content": system}, {"role": "user", "content": json.dumps({"playlist": sample, "taxonomy": {"genre": c["taxonomy"]["Genres"], "mood": c["taxonomy"]["Moods"], "language": c["taxonomy"]["Languages"]}}, ensure_ascii=False)}]}
-    print(f"Payload for AI classification: {json.dumps(payload, ensure_ascii=False)}")
+    #print(f"Payload for AI classification: {json.dumps(payload, ensure_ascii=False)}")
 
     headers = {"Content-Type": "application/json"}
     if key: headers["Authorization"] = "Bearer " + key

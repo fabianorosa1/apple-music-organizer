@@ -4,7 +4,7 @@
   "include_root_playlists": true,
   "provider": "ai",
   "ai": {
-    "endpoint": "http://127.0.0.1:8000/v1/chat/completions",
+    "endpoint": "http://192.168.68.65:8000/v1/chat/completions",
     "model": "Qwen3-14B-MLX-6bit",
     "api_key_env": "OMLX_API_KEY",
     "timeout_seconds": 45

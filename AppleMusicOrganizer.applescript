@@ -19,10 +19,21 @@ on inventoryText()
 		set specialKinds to special kind of every user playlist
 		repeat with i from 1 to (count of allPlaylists)
 			set p to item i of allPlaylists
-			if (item i of specialKinds as text) is "none" then
-				set pathText to my pathOfParent(p)
-				set pName to my clean(name of p)
-				set pID to persistent ID of p
+			set isPlain to false
+			set pName to ""
+			set pID to ""
+			set pathText to ""
+			try
+				set isPlain to ((item i of specialKinds as text) is "none")
+				if isPlain then
+					set pName to my clean(name of p)
+					set pID to persistent ID of p
+					set pathText to my pathOfParent(p)
+				end if
+			on error
+				set isPlain to false
+			end try
+			if isPlain then
 				set trackCount to 0
 				set genreText to ""
 				set artistText to ""
@@ -97,7 +108,7 @@ on folderIndex()
 			end if
 			if folderPath is not in paths then
 				set end of paths to folderPath
-				set end of refs to folderRef
+				set end of refs to persistent ID of folderRef
 			end if
 		end repeat
 	end tell
@@ -106,9 +117,9 @@ end folderIndex
 
 on applyPlan(planPath)
 	set planText to read (POSIX file planPath) as «class utf8»
-	set index to my folderIndex()
-	set knownPaths to item 1 of index
-	set knownRefs to item 2 of index
+	set folderData to my folderIndex()
+	set knownPaths to item 1 of folderData
+	set knownRefs to item 2 of folderData
 	set moved to 0
 	repeat with lineRef in paragraphs of planText
 		set lineText to lineRef as text
@@ -117,8 +128,9 @@ on applyPlan(planPath)
 			if (count of parts) is not 3 then error "Invalid apply record: " & lineText
 			set playlistID to item 2 of parts
 			set destination to item 3 of parts
-			set folderRef to my ensurePath(destination, knownPaths, knownRefs)
+			set folderID to my ensurePath(destination, knownPaths, knownRefs)
 			tell application "Music"
+				set folderRef to first folder playlist whose persistent ID is folderID
 				set matches to (every user playlist whose persistent ID is playlistID)
 				if (count of matches) is not 1 then error "Refusing identity " & playlistID & ": expected one match"
 				move (item 1 of matches) to folderRef
@@ -155,12 +167,14 @@ on ensurePath(destination, knownPaths, knownRefs)
 				if parentRef is missing value then
 					set newRef to make new folder playlist with properties {name:segName}
 				else
-					set newRef to make new folder playlist at parentRef with properties {name:segName}
+					set parentFolder to first folder playlist whose persistent ID is parentRef
+					set newRef to make new folder playlist at parentFolder with properties {name:segName}
 				end if
+				set newID to persistent ID of newRef
 			end tell
 			set end of knownPaths to currentPath
-			set end of knownRefs to newRef
-			set parentRef to newRef
+			set end of knownRefs to newID
+			set parentRef to newID
 		end if
 	end repeat
 	return parentRef
